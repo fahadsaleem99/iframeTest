@@ -142,17 +142,13 @@
           console.log('data::', event.data);
           console.log('Origin::', event.origin);
           switch (event.data.action) {
-            case 'Authenticate':
+            case 'Cards':
               //return window.postMessage({
               console.log('I got this::', event.data);
-              authSpc()
-              .then(response => {
-              	console.log('Fahad SPC Result', response);
-              	window.parent.postMessage({action: 'Success'}, "*");
-              	})
-              	.catch(error => {
-              		// ...handle/report eror...
-              		});
+		console.log('Card list sent!');
+		window.parent.postMessage({action: 'Success'}, "*");
+              //authSpc()
+              
               
           }
         })
