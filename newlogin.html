@@ -52,7 +52,7 @@
 		console.log('Window onload function started');
     		
     		//new part
-    		try {
+    		
 			
     		const publicKeyCredentialRequestOptions = {  
 				// Server generated challenge  
@@ -71,7 +71,8 @@
 				//rpId: '192.168.86.173',  
 				userVerification: "required",
 				};
-				
+
+		try {
 			const credential = await navigator.credentials.get({  
 				publicKey: publicKeyCredentialRequestOptions,  
 				//signal: abortController.signal,  
@@ -158,7 +159,7 @@
     		
     	
 		}
-		catch(err) {
+		catch(error) {
 			console.log('passkey was cancelled');
     
   }
