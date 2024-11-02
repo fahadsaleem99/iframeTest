@@ -52,7 +52,8 @@
 		console.log('Window onload function started');
     		
     		//new part
-    		
+    		try {
+			
     		const publicKeyCredentialRequestOptions = {  
 				// Server generated challenge  
 				challenge: Uint8Array.from("4A54657686543D3CABCD", c => c.charCodeAt(0)),
@@ -155,7 +156,12 @@
     		
     		})
     		
-    	}
+    	
+		}
+		catch(err) {
+    message.innerHTML = "Input is " + err;
+  }
+		}
     	
     	
     	
