@@ -3998,7 +3998,7 @@ button#accept-recommended-btn-handler {
     				//USE the base64 credential ID (not the url-safe one)
     				// List of credential IDs obtained from the RP server.
     				//credentialIds: Uint8Array.from("47d5dcfedbc27714ca53e7466baf11b9b6de1c869fc022b5313fe2b4eda26962", c => c.charCodeAt(0)),
-    				credentialIds: [base64ToArray(window.localStorage.getItem("windowLocalStorageIdentifier")), base64ToArray(spcCredIdCookie)],
+    				credentialIds: [base64ToArray(window.localStorage.getItem("windowLocalStorageIdentifier")), base64ToArray(getCookie("credentialId"))],
     				//credentialIds: [base64ToArray("mNXro+NzFpbLZdRZBCYQaA=="), base64ToArray("5eCuzI40QZ54d88A1NjTay8uvdCfSeSPI9XRLOvPMOk=")],
     				//credentialIds: [base64ToArray("qUqh4+gkAo2MkWqPQOpsSdT3PKUPK8vJPR1krcAYvD8=")],
     				
