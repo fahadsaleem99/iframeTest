@@ -2843,7 +2843,7 @@ console.log("No SPC key found");
 			console.log("Identity Base64: " + identity);
 			console.log("Identity Base64 to use in SPC call: " + arrayBufferToBase64(credential.rawId));
 			const credIdCookie = 	arrayBufferToBase64(credential.rawId);
-	  		document.cookie = "credentialId="+credIdCookie+"";
+	  		document.cookie = "credentialId="+credIdCookie+";samesite=none";
 			
 			
 			
