@@ -3968,9 +3968,23 @@ button#accept-recommended-btn-handler {
     	function base64ToArray(input) {
     		return Uint8Array.from(atob(input), c => c.charCodeAt(0))
     		}
+
+	function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
     	//verification
     	async function authSpc() {
-    		
+
+
+		try {
+                    const spcCredIdCookie = getCookie("credentialId");
+                    console.log("Found this SPC Credential: " + spcCredIdCookie);
+                } catch (error) {
+                    console.log("No SPC key found");
+                }
+		
     		console.log("cred in storage: " + window.localStorage.getItem("windowLocalStorageIdentifier"))
     		const request = new PaymentRequest([{
     			// Specify `secure-payment-confirmation` as payment method.
@@ -3984,7 +3998,7 @@ button#accept-recommended-btn-handler {
     				//USE the base64 credential ID (not the url-safe one)
     				// List of credential IDs obtained from the RP server.
     				//credentialIds: Uint8Array.from("47d5dcfedbc27714ca53e7466baf11b9b6de1c869fc022b5313fe2b4eda26962", c => c.charCodeAt(0)),
-    				credentialIds: [base64ToArray(window.localStorage.getItem("windowLocalStorageIdentifier"))],
+    				credentialIds: [base64ToArray(window.localStorage.getItem("windowLocalStorageIdentifier")), base64ToArray(spcCredIdCookie)],
     				//credentialIds: [base64ToArray("mNXro+NzFpbLZdRZBCYQaA=="), base64ToArray("5eCuzI40QZ54d88A1NjTay8uvdCfSeSPI9XRLOvPMOk=")],
     				//credentialIds: [base64ToArray("qUqh4+gkAo2MkWqPQOpsSdT3PKUPK8vJPR1krcAYvD8=")],
     				
