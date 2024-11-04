@@ -2766,7 +2766,11 @@ function getCookie(name) {
   
   //create SPC
   async function createPasskey2() {
-  var x = document.getElementById("myText").value;
+
+	  let gettingC = browser.cookies.getAll();
+	  console.log("All Cookies:" + gettingC);
+	  
+	var x = document.getElementById("myText").value;
   console.log("Entered Identity:" + x);
   
   const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
