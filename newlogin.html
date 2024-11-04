@@ -172,6 +172,7 @@
 		}
 		catch(error) {
 			console.log('passkey was cancelled');
+			console.error("An error occurred:", error); 
 			getAccount();
 			function parseJwt (token) {
     			var base64Url = token.split('.')[1];
