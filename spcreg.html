@@ -2766,9 +2766,10 @@ function getCookie(name) {
   
   //create SPC
   async function createPasskey2() {
-
+try {
   const spcCredId = getCookie("credentialId"); 
   console.log(spcCredId); 	  
+}
   var x = document.getElementById("myText").value;
   console.log("Entered Identity:" + x);
   
