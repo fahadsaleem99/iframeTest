@@ -2768,7 +2768,7 @@ function getCookie(name) {
   async function createPasskey2() {
 try {
   const spcCredId = getCookie("credentialId"); 
-  console.log(spcCredId); 	  
+  console.log("Found this SPC Credential: " + spcCredId); 	  
 } catch (error){
 console.log("No SPC key found");
 }
