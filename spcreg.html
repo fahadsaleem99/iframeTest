@@ -2841,9 +2841,9 @@ function getCookie(name) {
 			console.log("Identity Base64: " + identity);
 			console.log("Identity Base64 to use in SPC call: " + arrayBufferToBase64(credential.rawId));
 			const credIdCookie = 	arrayBufferToBase64(credential.rawId);
-	  		document.cookie = "credentialId="+credIdCookie+";samesite=none";
+	  		document.cookie = "credentialId1="+credIdCookie+";samesite=none";
 	  		console.log("Cookie written: " + credIdCookie);
-	  		const spcCredId = getCookie("credentialId");
+	  		const spcCredId = getCookie("credentialId1");
 			console.log("Cookie Read: " + spcCredId);
 			
 			
