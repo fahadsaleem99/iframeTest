@@ -2756,10 +2756,19 @@ button#accept-recommended-btn-handler {
   function arrayBufferToBase64(input) {
   	return btoa(arrayBufferToString(input));
   	}
+
+  // Reading a cookie
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
   
   //create SPC
   async function createPasskey2() {
-  
+
+  const spcCredId = getCookie("credentialId"); 
+  console.log(spcCredId); 	  
   var x = document.getElementById("myText").value;
   console.log("Entered Identity:" + x);
   
@@ -2830,6 +2839,8 @@ button#accept-recommended-btn-handler {
 			const identity = credential.id;
 			console.log("Identity Base64: " + identity);
 			console.log("Identity Base64 to use in SPC call: " + arrayBufferToBase64(credential.rawId));
+			const credId = 	arrayBufferToBase64(credential.rawId);
+	  		document.cookie = "credentialId="+credId+;
 			
 			
 			
