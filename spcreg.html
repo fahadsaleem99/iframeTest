@@ -2766,12 +2766,6 @@ function getCookie(name) {
   
   //create SPC
   async function createPasskey2() {
-try {
-  const spcCredId = getCookie("credentialId"); 
-  console.log("Found this SPC Credential: " + spcCredId); 	  
-} catch (error){
-console.log("No SPC key found");
-}
   var x = document.getElementById("myText").value;
   console.log("Entered Identity:" + x);
   
@@ -2844,7 +2838,9 @@ console.log("No SPC key found");
 			console.log("Identity Base64 to use in SPC call: " + arrayBufferToBase64(credential.rawId));
 			const credIdCookie = 	arrayBufferToBase64(credential.rawId);
 	  		document.cookie = "credentialId="+credIdCookie+";samesite=none";
-			
+	  		console.log("Cookie written: " + credIdCookie);
+	  		const spcCredId = getCookie("credentialId");
+			console.log("Cookie Read: " + spcCredId);
 			
 			
 			if (credential.getClientExtensionResults) {
