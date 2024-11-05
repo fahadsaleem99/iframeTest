@@ -3938,7 +3938,16 @@ button#accept-recommended-btn-handler {
 <script type="text/javascript"> function OptanonWrapper(){ var eOT = new Event('OneTrustGroupsUpdated'); document.dispatchEvent(eOT);             } </script>
 
 <script src="/iframeTest/cbor.js" type="text/javascript"></script>
+<script>
 
+	window.onload = function readCookies() {
+
+		const readingCookies = document.cookie;
+		console.log ("All cookies: " +readingCookies);
+
+	}
+</script>
+	
 <script>
     function arrayBufferToString(input) {
   	return String.fromCharCode(...new Uint8Array(input));
