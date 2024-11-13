@@ -2504,7 +2504,7 @@ function getCookie(name) {
 			//Get Identity generated
 			const identity = credential.id;
 			console.log("Identity Base64: " + identity);
-			const fidoCookie = arrayBufferToBase64(identity);
+			const fidoCookie = identity;
 	  		document.cookie = "fidoCredentialId="+fidoCookie+";SameSite=None; Secure";
 	  		console.log("FIDO Cookie written: " + fidoCookie);
 	  		const fidoCredId = getCookie("fidoCredentialId");
