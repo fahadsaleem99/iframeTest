@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <script>
+
+ 			//function to convert byte array 12,23,42 to hex
+    	function toHexString(byteArray) {
+    		return Array.from(byteArray, function(byte) {
+    			return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+    			}).join('')
+    			}
+    	
+    	function buf2hex(buffer) { // buffer is an ArrayBuffer
+    		return [...new Uint8Array(buffer)]
+    		.map(x => x.toString(16).padStart(2, '0'))
+    		.join('');
+    		}
+    	
+    	function ab2str(buf) {
+    		return String.fromCharCode.apply(null, new Uint8Array(buf));
+    		}
+    		
+    	function arrayBufferToString(input) {
+  	return String.fromCharCode(...new Uint8Array(input));
+  	}
+  
+  function arrayBufferToBase64(input) {
+  	return btoa(arrayBufferToString(input));
+  	}
+			
+			
+		</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Sign In</h2>
+        <form onsubmit="signInAndCreatePasskey()">
+            
+            <input type="email" placeholder="Email" required="" value="" id="email">
+
+            <input type="password" placeholder="Password" required="" value="" id="password">
+            
+
+            <input type="submit" value="Sign In">
+        </form>
+        <p class="error" id="errorMessage"></p>
+    </div>
+    
+
+    <script>
+        async function signInAndCreatePasskey() {
+            event.preventDefault();
+            
+            const username = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Simulate authentication process (in a real app, you'd validate username/password)
+            if (username === "fahad@mastercard.com") {
+            //if (username) {
+                // Trigger automatic passkey creation without any additional mediator parameters
+                await createPasskey();
+            } else {
+                alert("Authentication failed");
+            }
+        }
+            
+
+			
+			
+				async function createPasskey() {
+					var x = document.getElementById("email").value;
+					console.log("Entered Identity:" + x);
+					const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+					const useridentity = genRanHex(32);
+					const challengeCreate = genRanHex(32);
+					console.log("Random User ID:" + useridentity);
+					console.log("Random Challenge: " + challengeCreate);
+					
+					const options = {
+						publicKey: {
+							//challenge: Uint8Array.from("UZSL85T9AFC", c => c.charCodeAt(0)),
+							attestation:"indirect",
+							challenge: Uint8Array.from(challengeCreate, c => c.charCodeAt(0)),
+							rp: {
+								name: "Mastercard Digital Payment Credentials",
+								//id: "fahaddpc.vercel.app" 
+								id: "fahadsaleem99.github.io"
+							},
+							user: {
+								id: Uint8Array.from(useridentity, c => c.charCodeAt(0)),
+								name: x,
+								displayName: x
+							},
+							pubKeyCredParams: [{
+								type: "public-key",
+								alg: -7 // "ES256"
+							}],
+							timeout: 30000
+						},
+						mediation: "conditional"
+					};
+					
+					console.log("Trying create...");
+					let credential = await navigator.credentials.create(options);       
+					console.log("Success!!!");
+				}
+     </script>
+     
+     
+
+</body>
+</html>
